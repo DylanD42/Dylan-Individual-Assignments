@@ -3,7 +3,7 @@
 class Vector{
  private:
   int *vec_ptr;
-  int vec_size;
+  int vec_size, vec_capacity;
 
  public:
   Vector();
@@ -23,6 +23,6 @@ class Vector{
   void reserve(int n);
 
   int& operator[](unsigned int index);
-}
+};
 
 #endif
