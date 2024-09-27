@@ -40,90 +40,109 @@ int& Vector::operator[](unsigned int index){
   
   if(index >= size()){
     cout << "array index is out of bounds" << endl;
-    
   }
-  return vec_ptr[index];
+  else{
+    return vec_ptr[index];
+  }
+  
   
 }
 
 void Vector::push_back(int element){
   vec_size = size();
   vec_capacity = capacity();
-  //if(vec_size == 0 && vec_capacity == 0){
-    //cout << "Error must allocate memory first" << endl;
-    //}
-  //else if(vec_size == 0 && vec_capacity > vec_size){
-  vec_ptr[0] = element;
-  vec_ptr[1] = element+1;
-  vec_ptr[2] = element+2;
+  if(vec_capacity == 0 ){
+    reserve(2);
+  } 
+  else if(vec_capacity > vec_size){
+    vec_ptr[vec_size] = element;
+  }
+  else if(vec_capacity <= vec_size){
+    cout << "reserving more data" << endl;
+    reserve(vec_size);
+    vec_ptr[vec_size] = element;
+    cout << "reserved " << vec_capacity << " slots." << endl;
+  }
   
-  cout << "withinin pushback" << endl;
-  cout << vec_ptr[0] << " " << vec_ptr[1] << " "  << vec_ptr[2] << endl;
-    //}
-  
-  reserve(vec_size+1);
-  vec_ptr[vec_size] = element; 
 }
 
 void Vector::reserve(int n){
-  if(vec_capacity == 0){
-    cout << "vec_capacity: " << vec_capacity << endl;
+  if(vec_capacity == 0){     
+    //cout << "first set vec_capacity: " << vec_capacity << endl;
     vec_capacity = n;
-    cout << "set as n, vec_capacity: " << vec_capacity << endl;
+    //cout << "set as n, vec_capacity: " << vec_capacity << endl;
     int *newArray = new int[n];
     delete[] vec_ptr;
-    cout << "deleted vec_ptr" << endl;
-    cout << "vec_capacity = 0" << endl;
-    cout << "vec_capacity: "<< vec_capacity << endl << "n: " << n << endl;
+    //cout << "deleted vec_ptr" << endl;
+	 //cout << "vec_capacity = 0" << endl;
+        //cout << "vec_capacity: "<< vec_capacity << endl << "n: " << n << endl;
     vec_ptr = newArray;
   }
-  else if(n > vec_capacity){
-    cout << "pre ptr adress: " << vec_ptr << endl;
-    cout << "pre ptr size: " << sizeof(&vec_ptr) << endl;
+  else if(n >= vec_capacity){
+    cout << "inside n >= vec_capacity" << endl;
+    //cout << "pre ptr adress: " << vec_ptr << endl;
+        //cout << "pre ptr size: " << sizeof(&vec_ptr) << endl;
+        //cout << "n > vec; vec_capacity: " << vec_capacity << endl;
+        //cout << "pre loop ; n: " << n << endl;
+	int oldCapacity = capacity();
+	for(int i = vec_capacity; i < n*2;){
+	  cout << "n: " << n << endl;
+	      cout << "capacity: " << vec_capacity << endl;
+	      cout << endl;
+	  i = i*2;
+	  vec_capacity = i;
+	}
 
-    
-    cout << "n > vec; vec_capacity: " << vec_capacity << endl;
-    cout << "pre loop ; n: " << n << endl;
-    for(int i = vec_capacity; i < n;){
-      cout << "n: " << n << endl;
-      cout << "capacity: " << vec_capacity << endl;
-      cout << endl;
-      i = i*2;
-      vec_capacity = i;
-    }
-    cout << "n: " << n << endl;
-    cout << "capacity: " << vec_capacity << endl;
+	int *newArray = new int[vec_capacity];
 
-    
-    int *newArray = new int[vec_capacity];
-    for (int i = 0; i < vec_capacity; i++){
-      newArray[i] = vec_ptr[i];
-    }
-    
-    delete[] vec_ptr;
-    vec_ptr = newArray;
-    cout << "post ptr adress: " << vec_ptr << endl;
-    cout << "post ptr size: " << sizeof(&vec_ptr) << endl;
+	for (int i = 0; i < vec_capacity; i++){
+	  newArray[i] = vec_ptr[i];
+	}
+	delete[] vec_ptr;
+	vec_ptr = newArray;
+
+	for (int i = oldCapacity; i < vec_capacity; i++){
+	  
+	  vec_ptr[i] = 0;
+	}
+	
+	//cout << "n>vc !!!! n: " << n << endl;
+       //cout << "capacity: " << vec_capacity << endl;
+       //cout << "post ptr adress: " << vec_ptr << endl;
+       //cout << "post ptr size: " << sizeof(&vec_ptr) << endl;
   }
   else if (n <= vec_capacity){
   }
-  
+  cout << capacity();
 }
 
 int Vector::size(){
-  cout << endl << "size:" << endl << endl;
-  char end = '\0';
-  char current = *vec_ptr;
-  int size = 0;
-  while(end != current){
-    cout << "size of array: " << size << endl;
-    cout << "current char: " << current << endl;
-    current = (*vec_ptr + size);
-    size++;
-    
-      
-   cout << endl;
+  
+  //cout << vec_ptr[0] << " " << vec_ptr[1] << " "  << vec_ptr[2] << "inside size "<< endl;
+  vec_size = 0;
+  if(vec_capacity == 0){
+    cout << "Please call the reserve function to reserve memory" << endl;
+    return 0;
   }
+  if(vec_capacity > 0){
+    for(int i = 0; i < vec_capacity; i++){
+      //cout << "vec_size: " << vec_size<< endl;
+      //cout << vec_ptr[i] <<endl;
+      if(vec_ptr[i] != '\0'){
+	vec_size++;
+	//cout << "vec_size: " << vec_size<< endl;
+	//cout << "test" << vec_ptr[i] <<endl;
+      }
+      
+    }  
+    
+    //cout << "test " << vec_size;
+    return vec_size;
+  }
+  
+  
+  
+  int size = 1;
   return size;
 }
 
