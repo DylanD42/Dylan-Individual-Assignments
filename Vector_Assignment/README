@@ -1,1 +1,9 @@
-This assignment is a recreation of the STL Vector data structure 
+file: README
+author: Dylan Daniels
+date: 2024-09-27
+brief: Vectors without vectors
+description:Program that relecates the funtionallity of vectors from the C++ STL, using dynamic arrays  
+
+I ran tests to demostrate that the Vectors can handle 1000+ intigers using push_back, use brackets to initialize / modify / and access elements of the Vector, use size() to controll bounds of a loop, can use the assignment operator,and that the copy constructor and assignment operator make deep copys.
+
+The tests run automatically, With lables for which part of the criteria they test for.
