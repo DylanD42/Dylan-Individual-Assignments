@@ -1,17 +1,17 @@
 CC = g++
-TARGET = test
+TARGET = book
 CFLAGS = -c -Wall -Wextra
 
 all: $(TARGET)
 
-$(TARGET): phonebook.o main.o
-	$(CC) -g -Wall -Wextra -o $(TARGET) main.o phonebook.o
+$(TARGET): Phonebook.o main.o
+	$(CC) -g -Wall -Wextra -o $(TARGET) main.o Phonebook.o
 
-phonebook.o: phonebook.cpp phonebook.h
-	$(CC) $(CFLAGS) phonebook.cpp
+Phonebook.o: Phonebook.cpp Phonebook.h
+	$(CC) $(CFLAGS) Phonebook.cpp
 
-main.o: main.cpp phonebook.h
-	$(CC) $(CLFAGS) main.cpp
+main.o: main.cpp Phonebook.h
+	$(CC) $(CFLAGS) main.cpp
 
 clean:
 	$(RM) $(TARGET) *.o *~
