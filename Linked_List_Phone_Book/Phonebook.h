@@ -26,7 +26,7 @@ class Phonebook{
   void read_from_file(string filename);
   void write_to_file(string filename);
   void insert_sorted();
-  string lookup(string name);
+  string lookup(string first, string last);
   string reverse_lookup(string number);
   void print();
   void delete_user(string name);

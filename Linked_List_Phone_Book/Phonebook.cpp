@@ -74,10 +74,32 @@ void Phonebook::write_to_file(string filename){}
 void Phonebook::insert_sorted(){}
 
 string Phonebook::lookup(string first, string last){
+  cout << "Looking up: " << first << " " << last << endl;
+  Node *temp;
   
-  
-  
-  
+  // Case 1: empty list
+  if(head == NULL){
+    cout << "Error, Phonebook is empty" << endl;
+    return "";
+  }
+  // Case 2: head of list is the lookup name
+  else if (head->first_name == first && head->last_name == last){
+    return head->phone_number;
+  }
+  // Case 3: need to search and delete
+  else{
+    temp = head;
+
+    while(temp->next != NULL && temp->next->first_name != first && temp->next->last_name != last){
+      temp = temp->next;
+  }
+    // if no such value
+    if(temp -> next == NULL){
+      cout << first << " " << last << " isn't in the phonebook." << endl;
+      return "";
+    }
+    return temp->next->phone_number;
+  }
 }
 
 string Phonebook::reverse_lookup(string number){}

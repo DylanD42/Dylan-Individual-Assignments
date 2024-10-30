@@ -8,6 +8,10 @@ int main() {
   string file = "phonebook.txt";
   pb.read_from_file(file);
   pb.print();
+  cout << pb.lookup("Bob", "Bradley") << endl;
+  cout << pb.lookup("Qing", "Wang") << endl;
+  cout << pb.lookup("Dylan", "Daniels") << endl;
+  cout << pb.lookup("Lily", "Pharris") << endl;
   /*
   watchList.push_front("Brooklyn 99");
   watchList.print();
