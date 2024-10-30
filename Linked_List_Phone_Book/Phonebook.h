@@ -8,11 +8,10 @@ using namespace std;
 
 struct Node{
   Node *next;
-  string data;
   
-  // string first_name;
-  // string last_name;
-  // string phonenumber;
+  string first_name;
+  string last_name;
+  string phone_number;
 };
 
 
@@ -22,8 +21,8 @@ class Phonebook{
  public:
   Phonebook();
   ~Phonebook();
-  void push_front(string newData);
-  void push_back(string newData);
+  void push_front(string newFName, string newLName, string newPhone);
+  void push_back(string newFName, string newLName, string newPhone);
   void read_from_file(string filename);
   void write_to_file(string filename);
   void insert_sorted();

@@ -4,8 +4,11 @@
 using namespace std;
 
 int main() {
-  Phonebook watchList;
-  
+  Phonebook pb;
+  string file = "phonebook.txt";
+  pb.read_from_file(file);
+  pb.print();
+  /*
   watchList.push_front("Brooklyn 99");
   watchList.print();
   watchList.push_front("Parks & Rec");
@@ -23,7 +26,7 @@ int main() {
 
   watchList.delete_user("Primer");
   watchList.print();
-  
+  */
   return 0;
 }
 
