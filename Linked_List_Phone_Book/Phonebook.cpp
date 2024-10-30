@@ -1,4 +1,3 @@
-
 #include "Phonebook.h"
 #include <iostream>
 #include <fstream>
@@ -69,9 +68,68 @@ void Phonebook::read_from_file(string filename){
   infile.close();
 }
 
-void Phonebook::write_to_file(string filename){}
+void Phonebook::write_to_file(string filename){
+  ofstream outfile(filename);
+  if (!outfile){
+    cout << "Error. Unable to open the output file." << endl;
+  }
+  
+  Node *writeHelper;
+  //start at the head
+  writeHelper = head;
+  
+  while(writeHelper != NULL){
+    outfile << writeHelper -> first_name << " "
+	 << writeHelper->last_name << " " << writeHelper->phone_number << endl;
+    writeHelper = writeHelper -> next;
+  }
+  outfile.close();
+}
 
-void Phonebook::insert_sorted(){}
+void Phonebook::insert_sorted(string first, string last, string number){
+  Node *temp, *current, *before;
+  
+  //Case 1 Inserted belongs at head
+  if(last < head->last_name){
+    cout << "inserting at start!!" << endl;
+    push_front(first, last, number);
+    return;
+  }
+  //Case 2 Inserted belongs somewhere in middle
+  else{
+    temp = head->next;
+    current = temp->next;
+    before = head;
+    while((!(last < temp->next->last_name)) && (temp->next != NULL)){
+      temp = temp->next;
+      before = before->next;
+      current = current->next;
+    }
+    
+    temp->first_name = first;
+    temp->last_name = last;
+    temp->phone_number = number;
+    
+    before->next = temp;
+    temp->next = current;
+
+    
+    // if no such value
+    if(temp -> next == NULL){
+      push_back(first, last, number);
+      cout << "inserting at end!!" << endl;
+      return;
+    }
+
+
+    
+    cout << "inserting in middle!!" << endl;
+    return;
+  }
+  //Case 3 Inserted belongs at tail
+  
+  
+}
 
 string Phonebook::lookup(string first, string last){
   cout << "Looking up: " << first << " " << last << endl;
@@ -102,8 +160,36 @@ string Phonebook::lookup(string first, string last){
   }
 }
 
-string Phonebook::reverse_lookup(string number){}
+string Phonebook::reverse_lookup(string number){
+  cout << "Looking for a user with phone number of: " << number << endl;
+  Node *temp;
+  
+  // Case 1: empty list
+  if(head == NULL){
+    cout << "Error, Phonebook is empty" << endl;
+    return "";
+  }
+  // Case 2: head of list is the lookup name
+  else if (head->phone_number == number){
+    return (head->first_name + " " + head->last_name);
+  }
+  // Case 3: need to search and delete
+  else{
+    temp = head;
+    while(temp->next != NULL && temp->next->phone_number != number){
+      temp = temp->next;
+    }
+    // if no such value
+    if(temp -> next == NULL){
+      cout << "There isn't a user with the phone number: " << number << " in our system." << endl;
+      return "";
+    }
+    return (temp->next->first_name + " " + temp->next->last_name);
+  }
+}
 
+
+	    
 void Phonebook::print(){
   Node *printHelper;
 
