@@ -87,8 +87,8 @@ void Phonebook::write_to_file(string filename){
 }
 
 void Phonebook::insert_sorted(string first, string last, string number){
-  Node *temp, *current, *before;
-  
+  Node *before, *after;
+  Node *current = new Node;
   //Case 1 Inserted belongs at head
   if(last < head->last_name){
     cout << "inserting at start!!" << endl;
@@ -96,40 +96,64 @@ void Phonebook::insert_sorted(string first, string last, string number){
     return;
   }
   //Case 2 Inserted belongs somewhere in middle
-  else{
-    temp = head->next;
-    current = temp->next;
+  if(last != head->last_name){
+    after = head->next;
     before = head;
-    while((!(last < temp->next->last_name)) && (temp->next != NULL)){
-      temp = temp->next;
+    while((!(last < after->last_name))){
       before = before->next;
-      current = current->next;
+      after = after->next;
+    }
+    if(before->next == NULL){
+      cout << "Push back";
+      push_back(first, last, number);
+      return;
+    }
+    if(last < after->last_name){
+      cout << "inserting at mid " << endl;
+      current->first_name = first;
+      
+      current->last_name = last;
+      current->phone_number = number;
+      current->next = after;
+      
+      before->next = current;
+      cout << "inserting at midreturn " << endl;
+      return;
+    }
+  }
+  /*
+  else{
+    //current = head->next;
+    after = head->next;
+    before = head;
+    while((!(last < before->last_name)) && (after->next != NULL) && !(before->last_name == after->last_name)){
+      before = before->next;
+      //current = temp->next;
+      after = after->next;
+    }
+    if(((last < before->last_name)) && (after->next != NULL) && (before->last_name == after->last_name)){
+    current->first_name = first;
+    current->last_name = last;
+    current->phone_number = number;
+    
+    before->next = current;
+    current->next = after;
+    return;
     }
     
-    temp->first_name = first;
-    temp->last_name = last;
-    temp->phone_number = number;
-    
-    before->next = temp;
-    temp->next = current;
-
-    
     // if no such value
-    if(temp -> next == NULL){
+    if(after->next == NULL){
       push_back(first, last, number);
       cout << "inserting at end!!" << endl;
       return;
     }
-
+  */
 
     
-    cout << "inserting in middle!!" << endl;
-    return;
-  }
-  //Case 3 Inserted belongs at tail
-  
-  
+  //cout << "inserting in middle!!" << endl;
+  return;
 }
+//Case 3 Inserted belongs at tail
 
 string Phonebook::lookup(string first, string last){
   cout << "Looking up: " << first << " " << last << endl;

@@ -14,9 +14,9 @@ int main() {
   cout << pb.lookup("Lily", "Pharris") << endl;
   cout << pb.reverse_lookup("(731)445-9783");
   pb.write_to_file("phonebookOut.txt");
-  //pb.insert_sorted("Dylan", "Abba", "(777)777-777");
+  pb.insert_sorted("Dylan", "Abba", "(777)777-777");
   pb.insert_sorted("Dylan", "Pickle", "(777)777-777");
-  //pb.insert_sorted("Dylan", "Zbba", "(777)777-777");
+  pb.insert_sorted("Dylan", "Zbba", "(777)777-777");
   pb.print();
   /*
   watchList.push_front("Brooklyn 99");
