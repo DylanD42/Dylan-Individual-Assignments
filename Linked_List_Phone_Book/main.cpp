@@ -1,3 +1,12 @@
+/**
+ * @file main.cpp
+ * @author Dylan Daniels
+ * @date 2024-10-30
+ * @brief the main file to demostrate my linked list phonebook assigment
+ * 
+ * takes user input to work with the linked list phonebook
+ */
+
 #include "Phonebook.h"
 #include <iostream>
 #include <string>
@@ -8,9 +17,9 @@ int main() {
   Phonebook pb;
   string defaultInfile = "phonebook.txt";
   string defaultOutfile = "phonebookOut.txt";
-  string userInfile, userOutfile, first, last, phone;
-  int userImput = 0;
-  int secondImput = 0;
+  string userInfile, userOutfile, first, last, phone; // user input options that can be reused
+  int userImput = 0; // first "layer", I.E. menu options 1-8
+  int secondImput = 0; // second "layer", only for selecting input/output file 1(custom input filename) or 2 (pre-made list of users) 
   cout << "Welcome to the UTM Phonebook!, You may select one of the following options:" << endl;
   while(userImput != 8){
     
@@ -26,7 +35,7 @@ int main() {
 	 << "Please enter your choice now: ";
     cin >> userImput;
     cout << endl << endl;
-    
+    // just runs through each option and calls respective function.
     if(userImput == 1){
       secondImput = 0;
       cout << "Select a file to read in." << endl;

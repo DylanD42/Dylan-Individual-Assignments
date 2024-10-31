@@ -1,0 +1,31 @@
+/**
+ * @file README
+ * @author Dylan Daniels
+ * @date 2024-10-30
+ * @brief program to demostrate linked list implementation
+ * 
+ * using the linked list ADT, a phonebook is created
+ */
+
+When ran in the terminal from ./book
+The user will be prompted with choices 1-8
+
+    Welcome to the UTM Phonebook!  You may select one of the following options:
+    1 Read a phonebook from a file
+    2 Write the phonebook to a file
+    3 Print the phonebook
+    4 Search for a user's phone number
+    5 Reverse lookup by phone number
+    6 Add a user
+    7 Delete a user
+    8 Exit this program
+    
+    Please enter your choice now:
+
+
+choices 1 and 2 will ask the user again for a choice of 1 or 2
+choosing 1 will allow the user to imput their own filename
+choosing 2 will open a predetermined file, both for imput/output files.
+if the imputed file to be opened is invailid the user will be notified
+and will be asked to retype 1 or 2 at the home screen to be repromped.
+
