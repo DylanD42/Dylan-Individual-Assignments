@@ -5,38 +5,47 @@ using namespace std;
 
 int main() {
   Phonebook pb;
-  string file = "phonebook.txt";
+  string defaultInfile = "phonebook.txt";
+  string defaultOutfile = "phonebookOut.txt";
+  string userInfile, userOutfile;
+  int userImput = 0;
+  int secondImput = 0;
+  cout << "Welcome to the UTM Phonebook!, You may select one of the following options:" << endl;
+  while(userImput != 8){
+    cout << "1 Read a phonebook from a file" << endl
+	 << "2 Write the phonebook to a file" << endl
+	 << "3 Print the phonebook" << endl
+	 << "4 Search for a user's phone number" << endl
+	 << "5 Reverse lookup by phone number" << endl
+	 << "6 Add a user" << endl
+	 << "7 Delete a user" << endl
+	 << "8 Exit this program" << endl
+	 << "Please enter your choice now: ";
+    cin >> userImput;
+    cout << endl << endl;
+    
+    if(userImput == 1){
+      cout << "Do you want to choose a file (1) or a predetermined one(2): ";
+      cin >> secondImput;
+      if(secondImput == 1){
+	cin >> userInfile;
+	pb.read_from_file(userInfile);
+	
+      }
+      else if(secondImput == 2){
+	pb.read_from_file(defaultInfile);
+
+      }
+    }
+    
+  }
+  
+  
+  
   pb.read_from_file(file);
-  pb.print();
-  cout << pb.lookup("Bob", "Bradley") << endl;
-  cout << pb.lookup("Qing", "Wang") << endl;
-  cout << pb.lookup("Dylan", "Daniels") << endl;
-  cout << pb.lookup("Lily", "Pharris") << endl;
-  cout << pb.reverse_lookup("(731)445-9783");
   pb.write_to_file("phonebookOut.txt");
-  pb.insert_sorted("Dylan", "Abba", "(777)777-777");
-  pb.insert_sorted("Dylan", "Pickle", "(777)777-777");
-  pb.insert_sorted("Dylan", "Zbba", "(777)777-777");
   pb.print();
-  /*
-  watchList.push_front("Brooklyn 99");
-  watchList.print();
-  watchList.push_front("Parks & Rec");
-  watchList.print();
-  watchList.push_back("Primer");
-  watchList.print();
-  watchList.push_front("Monty Python");
-  watchList.print();
-  // testing removes
-  watchList.delete_user("Monty Python");
-  watchList.print();
-
-  watchList.delete_user("Brooklyn 99");
-  watchList.print();
-
-  watchList.delete_user("Primer");
-  watchList.print();
-  */
   return 0;
 }
 
+//void option1(){}
