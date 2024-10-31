@@ -13,7 +13,7 @@ Phonebook::~Phonebook(){
   while(head != NULL){
     cout << "Removing list member: " << head->first_name
 	 << " " << head->last_name << " " << head->phone_number << endl;
-    delete_user(head->first_name);
+    delete_user(head->first_name, head->last_name);
   }
 }
 
@@ -118,12 +118,12 @@ void Phonebook::insert_sorted(string first, string last, string number){
 }
 
 string Phonebook::lookup(string first, string last){
-  cout << "Looking up: " << first << " " << last << endl;
+  
   Node *temp;
   
   // Case 1: empty list
   if(head == NULL){
-    cout << "Error, Phonebook is empty" << endl;
+    cout << endl << "Error, Phonebook is empty" << endl;
     return "";
   }
   // Case 2: head of list is the lookup name
@@ -139,7 +139,7 @@ string Phonebook::lookup(string first, string last){
   }
     // if no such value
     if(temp -> next == NULL){
-      cout << first << " " << last << " isn't in the phonebook." << endl;
+      cout << endl << first << " " << last << " isn't in the phonebook." << endl;
       return "";
     }
     return temp->next->phone_number;
@@ -147,12 +147,12 @@ string Phonebook::lookup(string first, string last){
 }
 
 string Phonebook::reverse_lookup(string number){
-  cout << "Looking for a user with phone number of: " << number << endl;
+  
   Node *temp;
   
   // Case 1: empty list
   if(head == NULL){
-    cout << "Error, Phonebook is empty" << endl;
+    cout << endl << "Error, Phonebook is empty" << endl;
     return "";
   }
   // Case 2: head of list is the lookup name
@@ -167,7 +167,7 @@ string Phonebook::reverse_lookup(string number){
     }
     // if no such value
     if(temp -> next == NULL){
-      cout << "There isn't a user with the phone number: " << number << " in our system." << endl;
+      cout << endl << "There isn't a user with the phone number: " << number << " in our system." << endl;
       return "";
     }
     return (temp->next->first_name + " " + temp->next->last_name);
@@ -177,15 +177,16 @@ string Phonebook::reverse_lookup(string number){
 void Phonebook::print(){
   Node *printHelper;
   printHelper = head;
-  
+  cout << endl << endl;
   while(printHelper != NULL){
     cout << printHelper -> first_name << " "
 	 << printHelper->last_name << " " << printHelper->phone_number << endl;
     printHelper = printHelper -> next;
   }
+  cout << endl << endl;
 }
 
-void Phonebook::delete_user(string name){
+void Phonebook::delete_user(string first, string last){
   Node *temp, *eraser;
   
   // Case 1: empty list
@@ -193,7 +194,7 @@ void Phonebook::delete_user(string name){
     return;
   }
   // Case 2: Delete the head of the list
-  else if (head->first_name == name){
+  else if ((head->first_name == first)&&(head->last_name == last)){
     eraser = head;
     head = head -> next;
     delete eraser; 
@@ -202,7 +203,8 @@ void Phonebook::delete_user(string name){
   else{
     temp = head;
 
-    while(temp->next != NULL && temp->next->first_name != name){
+    while((temp->next != NULL && temp->next->first_name != first)
+	  && (temp->next != NULL && temp->next->last_name != last)){
       temp = temp->next;
     }
     // if no such value

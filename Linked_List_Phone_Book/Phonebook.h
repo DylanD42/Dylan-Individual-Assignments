@@ -29,7 +29,7 @@ class Phonebook{
   string lookup(string first, string last);
   string reverse_lookup(string number);
   void print();
-  void delete_user(string name);
+  void delete_user(string first, string last);
 
 };
 
