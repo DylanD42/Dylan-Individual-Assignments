@@ -1,13 +1,38 @@
+/**
+ * @file Phonebook.cpp
+ * @author Dylan Daniels
+ * @date 2024-10-30
+ * @brief code for a linked list phonebook
+ * 
+ * Uses a linked list ADT to make a phonebook where you can add / remove users and lookup users by phone number or name.
+ */
+
 #include "Phonebook.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 using namespace std;
 
+
+/**
+ * constructor for phonebook class
+ *
+ * @pre 
+ * @post sets the head of the pb to null
+ * 
+ */
 Phonebook::Phonebook(){
   head = NULL;
 }
 
+
+/**
+ * destructor for the phonebook class
+ *
+ * @pre phonebook is properly created
+ * @post deallocates memory taken up by the nodes
+ * 
+ */
 Phonebook::~Phonebook(){
   cout << "Destroying List: " << endl;
   while(head != NULL){
@@ -17,6 +42,18 @@ Phonebook::~Phonebook(){
   }
 }
 
+
+/**
+ * loads in the first node at the front
+ *
+ * @param string newFName properly loaded first name
+ * @param string newLName properly loaded last name
+ * @param string newPhone properly loaded phone number
+ * @pre phonebook is created
+ * @return void 
+ * @post the loaded data is put into the first positon of the linked list pushing everything else back
+ * 
+ */
 void Phonebook::push_front(string newFName, string newLName, string newPhone){
   Node *insert = new Node;
   insert -> next = NULL;
@@ -29,6 +66,18 @@ void Phonebook::push_front(string newFName, string newLName, string newPhone){
   head = insert;
 
 }
+
+/**
+ * loads in data to the tail
+ *
+ * @param string newFName properly loaded first name
+ * @param string newLName properly loaded last name
+ * @param string newPhone properly loaded phone number
+ * @pre phonebook is created
+ * @return void 
+ * @post pushes back the data to make the new data the last element of the linked list
+ * 
+ */
 void Phonebook::push_back(string newFName, string newLName, string newPhone){
   Node *newNode = new Node;
   newNode -> next = NULL;
@@ -51,6 +100,16 @@ void Phonebook::push_back(string newFName, string newLName, string newPhone){
   }
 }
 
+
+/**
+ * reads in data from file
+ *
+ * @param string filename is a valid filename to be opened
+ * @pre phonebook is created and filename is correct
+ * @return void 
+ * @post loads the data from the properly formatted file into the linked list in the order read in from file
+ * 
+ */
 void Phonebook::read_from_file(string filename){
   string TempFirst, TempLast, TempNumber;
   ifstream infile(filename);
@@ -65,6 +124,16 @@ void Phonebook::read_from_file(string filename){
   infile.close();
 }
 
+
+/**
+ * writes to file
+ *
+ * @param string filename is a proper file to write to
+ * @pre phonebook is created and preferably loaded with data
+ * @return void 
+ * @post data is written to file
+ * 
+ */
 void Phonebook::write_to_file(string filename){
   ofstream outfile(filename);
   if (!outfile){
@@ -83,6 +152,18 @@ void Phonebook::write_to_file(string filename){
   outfile.close();
 }
 
+
+/**
+ * puts a new node in the middle of the linked list according to where it belongs alphabetically 
+ *
+ * @param string first loaded first name
+ * @param string last loaded last name
+ * @param string number loaded phone number
+ * @pre phonebook is created and data is loaded 
+ * @return void 
+ * @post inserts the data into proper location sorting by last name alphabetically 
+ * 
+ */
 void Phonebook::insert_sorted(string first, string last, string number){
   Node *before, *after;
   Node *current = new Node;
@@ -117,6 +198,17 @@ void Phonebook::insert_sorted(string first, string last, string number){
   return;
 }
 
+
+/**
+ * looks up user by name
+ *
+ * @param string first properly loaded first name
+ * @param string last properly loaded last name 
+ * @pre phonebook is loaded with data
+ * @return string the phonenumber associated with that name
+ * @post 
+ * 
+ */
 string Phonebook::lookup(string first, string last){
   
   Node *temp;
@@ -146,6 +238,16 @@ string Phonebook::lookup(string first, string last){
   }
 }
 
+
+/**
+ * looks up users name from phone number
+ *
+ * @param string number is a properly loaded phonenubmer
+ * @pre phonebook is loaded with data
+ * @return string the first and last name concatnated with spaces to displace the full name
+ * @post 
+ * 
+ */
 string Phonebook::reverse_lookup(string number){
   
   Node *temp;
@@ -174,6 +276,15 @@ string Phonebook::reverse_lookup(string number){
   }
 }
 	    
+
+/**
+ * prints the data
+ *
+ * @pre phonebook is created and preferably loaded with data
+ * @return void 
+ * @post the phonebook is printed
+ * 
+ */
 void Phonebook::print(){
   Node *printHelper;
   printHelper = head;
@@ -186,6 +297,17 @@ void Phonebook::print(){
   cout << endl << endl;
 }
 
+
+/**
+ * deletes user
+ *
+ * @param string first proper first name
+ * @param string last proper last name
+ * @pre phonebook is created and is preferablly loaded with data
+ * @return void 
+ * @post the user proved is deleted from the linked list
+ * 
+ */
 void Phonebook::delete_user(string first, string last){
   Node *temp, *eraser;
   
