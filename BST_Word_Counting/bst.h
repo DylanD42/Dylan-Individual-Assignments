@@ -2,7 +2,7 @@
 #define BST_H
 
 #include <iostream>
-
+#include <string>
 using namespace std;
 
 class Node {
@@ -19,13 +19,18 @@ private:
   void insertHelper(Node *current, int value);
   void printHelper(Node *current);
   void destructorHelper(Node* current);
+  void deleteHelper(Node* &current, int value);
 public:
   BST();
   ~BST();
   void insert(int value);
+  void set(string word, int value);
+  void min();
+  void max();
   void print();
+  void save_file(string filename);
   void deleteNode(int value);
-  void deleteHelper(Node* &current, int value);
+  
 };
 // bst header file
 

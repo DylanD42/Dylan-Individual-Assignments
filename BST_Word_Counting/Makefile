@@ -1,5 +1,5 @@
 CC = g++
-TARGET = bst
+TARGET = run
 CFLAGS = -c -Wall -Wextra
 
 all: $(TARGET)

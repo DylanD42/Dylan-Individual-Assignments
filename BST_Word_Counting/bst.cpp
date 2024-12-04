@@ -94,7 +94,7 @@ void BST::deleteHelper(Node *&current, int value){
     if (current->left == NULL){
       temp = current->right;
       delete current;
-      current == temp;
+      current = temp;
     }
 
     if (current->right == NULL){
