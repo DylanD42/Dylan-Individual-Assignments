@@ -1,9 +1,10 @@
 #include "bst.h"
 #include <iostream>
-
+#include <fstream>
+#include <cctype> // to lower
 using namespace std;
 
-Node::Node(int value){
+Node::Node(string value){
   left = NULL;
   right = NULL;
   data = value;
@@ -26,7 +27,7 @@ void BST::destructorHelper(Node *current){
   delete current;
 }
 
-void BST::insert(int value){
+void BST::insert(string value){
   if (root == NULL){
     root = new Node(value);
   }
@@ -35,8 +36,11 @@ void BST::insert(int value){
   }
 }
 
-void BST::insertHelper(Node *current, int value){
-  if (value < current->data){
+void BST::insertHelper(Node *current, string value){
+  if (value == current->data){
+    current->count++;
+  }
+  else if (value < current->data){
     if (current->left == NULL) {
       current->left = new Node(value);
     }
@@ -64,21 +68,22 @@ void BST::printHelper(Node *current){
     return;
   }
   printHelper(current->left);
-  cout << current->data << " ";
+  cout << current->data << ":" << current->count << " " << endl;
   printHelper(current->right);
 }
 
-void BST::deleteNode(int value){
+void BST::deleteNode(string value){
   deleteHelper(root, value);
 }
 
-void BST::deleteHelper(Node *&current, int value){
+void BST::deleteHelper(Node *&current, string value){
   // node doesn't exist
   if (current == NULL){
     return;
   }
   // 2 value is < current node's value, go left
-  else if (value < current->data){
+  
+  if (value < current->data){
     deleteHelper(current->left, value);
   }
 
@@ -97,7 +102,7 @@ void BST::deleteHelper(Node *&current, int value){
       current = temp;
     }
 
-    if (current->right == NULL){
+    else if (current->right == NULL){
       temp = current->left;
       delete current;
       current = temp;
@@ -123,4 +128,37 @@ void BST::deleteHelper(Node *&current, int value){
     // 4.2 no left subtree
     
   }
+}
+
+void BST::read_file(string filename){
+  string word;
+
+  ifstream infile(filename);
+  if(!infile){
+    cout << "Error, Unable to open the input file." << endl;
+    return;
+  }
+  infile >> word;     ;
+  while(infile){
+    insert(filter(word));
+    infile >> word;  
+  }
+  infile.close();
+}
+string BST::filter(string word){
+  
+  char c;
+  string newWord;
+  for(int i = 0; i <= static_cast<int>(word.length()); i++){
+    c = tolower(word[i]);
+    // word[i];
+    
+    if(c != ' ' && c != '!' && c != '?' && c != '.' && c != ',' && c != '&' && c != '$'&&  c != '\'' && c != '\n' &&  c != '\0' &&  c != '*' &&
+       c != '"' && c != '%' && c != '(' && c != ')' && c != '-' && c != '_'&&  c != '`'&&  c != '['&&  c != ']' &&  c != ';' &&  c != ':'){
+      // 
+      newWord += c; 
+    }
+    else{}
+  }
+  return newWord;
 }

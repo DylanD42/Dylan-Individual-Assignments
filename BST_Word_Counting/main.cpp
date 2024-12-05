@@ -5,28 +5,32 @@
 using namespace std;
 
 int main() {
-  BST tree;
+  BST tree;/*
   tree.print();
-  tree.insert(6);
+  tree.insert("F");
   tree.print();
-  tree.insert(3);
+  tree.insert("C");
   tree.print();
-  tree.insert(7);
+  tree.insert("G");
   tree.print();
-  tree.insert(5);
+  tree.insert("E");
   tree.print();
-  tree.insert(9);
+  tree.insert("H");
   tree.print();
-  tree.insert(1);
+  tree.insert("A");
   tree.print();
-  tree.insert(2);
+  tree.insert("B");
+  tree.insert("H");
 
   cout << "Final tree:\n";
   tree.print();
 
-  tree.deleteNode(1);
+  
+  tree.deleteNode("E");
   cout << "Tree after delete:\n";
   tree.print();
-  
+	   */
+  tree.read_file("sherlock.txt");
+  tree.print();
   return 0;
 }

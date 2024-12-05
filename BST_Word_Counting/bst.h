@@ -7,29 +7,32 @@ using namespace std;
 
 class Node {
  public:
-  Node(int value);
+  Node(string value);
   Node *left, *right;
-  int data;
+  string data;
+  int count = 1;
 };
 
 
 class BST {
 private:
   Node *root;
-  void insertHelper(Node *current, int value);
+  void insertHelper(Node *current, string value);
   void printHelper(Node *current);
   void destructorHelper(Node* current);
-  void deleteHelper(Node* &current, int value);
+  void deleteHelper(Node* &current, string value);
+  string filter(string word);
 public:
   BST();
   ~BST();
-  void insert(int value);
-  void set(string word, int value);
+  void insert(string value);
+  void set(string word, string value);
   void min();
   void max();
   void print();
   void save_file(string filename);
-  void deleteNode(int value);
+  void read_file(string filename);
+  void deleteNode(string value);
   
 };
 // bst header file
