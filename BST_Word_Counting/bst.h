@@ -10,7 +10,7 @@ class Node {
   Node(string value);
   Node *left, *right;
   string data;
-  int count = 1;
+  int count;
 };
 
 
@@ -23,6 +23,7 @@ private:
   void deleteHelper(Node* &current, string value);
   void minHelper(Node *current);
   void maxHelper(Node *current);
+  void findHelper(Node *current, string word, bool &found);
   string filter(string word);
 public:
   BST();
@@ -31,7 +32,9 @@ public:
   void set(string word, string value);
   void min();
   void max();
+  void set(string word, int setCount);
   void print();
+  void find(string word);
   void save_file(string filename);
   void read_file(string filename);
   void deleteNode(string value);

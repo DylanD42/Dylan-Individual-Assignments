@@ -33,5 +33,10 @@ int main() {
   tree.read_file("song.txt");
   tree.print();
   tree.min();
+  tree.max();
+  tree.find("t");
+  tree.find("test");
+  tree.set("test", 5);
+  tree.print();
   return 0;
 }

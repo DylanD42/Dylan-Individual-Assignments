@@ -8,6 +8,7 @@ Node::Node(string value){
   left = NULL;
   right = NULL;
   data = value;
+  count = 1;
 }
 
 BST::BST() {
@@ -131,16 +132,19 @@ void BST::deleteHelper(Node *&current, string value){
 }
 
 void BST::read_file(string filename){
-  string word;
+  string word, filteredWord;
 
   ifstream infile(filename);
   if(!infile){
     cout << "Error, Unable to open the input file." << endl;
     return;
   }
-  infile >> word;     ;
+  infile >> word;
   while(infile){
-    insert(filter(word));
+    word = filter(word);
+    if(!word.empty()){
+      insert(word);
+    }
     infile >> word;  
   }
   infile.close();
@@ -149,18 +153,9 @@ string BST::filter(string word){
   
   char c;
   string newWord;
-  for(int i = 0; i <= static_cast<int>(word.length()); i++){
+  for(int i = 0; i < static_cast<int>(word.length()); i++){
     c = tolower(word[i]);
-    // word[i];
-    
-    if(
-       c >= 97 && c <= 122 
-       
-       /*
-       c != ' ' && c != '!' && c != '?' && c != '.' && c != ',' && c != '&' && c != '$'&&  c != '\'' && c != '\n' &&  c != '\0' &&  c != '*' &&
-       c != '"' && c != '%' && c != '(' && c != ')' && c != '-' && c != '_'&&  c != '`'&&  c != '['&&  c != ']' &&  c != ';' &&  c != ':'*/
-       ){
-      // 
+    if(c >= 97 && c <= 122){
       newWord += c; 
     }
     else{}
@@ -181,5 +176,46 @@ void BST::minHelper(Node *current){
 }
 
 void BST::max(){
-
+  maxHelper(root);
 }
+
+void BST::maxHelper(Node *current){
+  if(current->right == NULL){
+    cout << "MAX: " << current->data << endl;
+    return;
+  }
+  maxHelper(current->right);
+}
+
+void BST::find(string word){
+    bool found = false;
+    findHelper(root, word, found);
+    if (!found) {
+      cout << word << " wasn't found in the BST." << endl;
+    }
+}
+
+void BST::findHelper(Node *current, string word, bool &found){
+  if (current == NULL) {
+        return;
+    }
+
+    if (current->data == word) {
+        cout << word << " was found " << current->count << " times." << endl;
+        found = true;
+        return;
+    }
+
+    findHelper(current->left, word, found);
+    findHelper(current->right, word, found);  
+}
+
+
+void BST::set(string word, int setCount){
+  deleteNode(word);
+  for(int i = 0; i < setCount; i++){
+    insert(word);
+  }
+}
+  
+  
