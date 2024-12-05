@@ -21,6 +21,8 @@ private:
   void printHelper(Node *current);
   void destructorHelper(Node* current);
   void deleteHelper(Node* &current, string value);
+  void minHelper(Node *current);
+  void maxHelper(Node *current);
   string filter(string word);
 public:
   BST();

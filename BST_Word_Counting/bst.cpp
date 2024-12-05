@@ -153,12 +153,33 @@ string BST::filter(string word){
     c = tolower(word[i]);
     // word[i];
     
-    if(c != ' ' && c != '!' && c != '?' && c != '.' && c != ',' && c != '&' && c != '$'&&  c != '\'' && c != '\n' &&  c != '\0' &&  c != '*' &&
-       c != '"' && c != '%' && c != '(' && c != ')' && c != '-' && c != '_'&&  c != '`'&&  c != '['&&  c != ']' &&  c != ';' &&  c != ':'){
+    if(
+       c >= 97 && c <= 122 
+       
+       /*
+       c != ' ' && c != '!' && c != '?' && c != '.' && c != ',' && c != '&' && c != '$'&&  c != '\'' && c != '\n' &&  c != '\0' &&  c != '*' &&
+       c != '"' && c != '%' && c != '(' && c != ')' && c != '-' && c != '_'&&  c != '`'&&  c != '['&&  c != ']' &&  c != ';' &&  c != ':'*/
+       ){
       // 
       newWord += c; 
     }
     else{}
   }
   return newWord;
+}
+
+
+void BST::min(){
+  minHelper(root);
+}
+void BST::minHelper(Node *current){
+  if(current->left == NULL){
+    cout << "MIN: " << current->data << endl;
+    return;
+  }
+  minHelper(current->left);
+}
+
+void BST::max(){
+
 }

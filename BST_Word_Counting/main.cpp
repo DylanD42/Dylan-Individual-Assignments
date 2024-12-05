@@ -30,7 +30,8 @@ int main() {
   cout << "Tree after delete:\n";
   tree.print();
 	   */
-  tree.read_file("sherlock.txt");
+  tree.read_file("song.txt");
   tree.print();
+  tree.min();
   return 0;
 }
