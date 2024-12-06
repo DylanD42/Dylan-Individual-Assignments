@@ -278,7 +278,7 @@ string BST::filter(string word){
   string newWord;
   for(int i = 0; i < static_cast<int>(word.length()); i++){
     c = tolower(word[i]);
-    if(c >= 97 && c <= 122){
+    if((c >= 97 && c <= 122) || c == 39){
       newWord += c; 
     }
     else{}

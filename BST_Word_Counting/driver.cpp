@@ -1,7 +1,7 @@
 /**
- * @file driver.cpp
+0;10;1c * @file driver.cpp
  * @author Dylan Daniels
- * @date 2024-12-05
+0;10;1c * @date 2024-12-05
  * @brief driver function
  * 
  * Is the file for showing my implemetation of the BST ADT
@@ -41,7 +41,8 @@ int main() {
       cout << "Please enter the file to write to: ";
       cin >> filename;
       tree.writeFile(filename);
-    break;} // write
+    break;
+    } // write
     case 3:{
       cout << "What word would you like to add to the BST: ";
       cin >> word;

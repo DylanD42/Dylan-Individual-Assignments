@@ -20,5 +20,5 @@ You will be prompted with 10 options
     9. Delete a element.
     10. Exit this program.
 
-This program filters strings to only include letters a-z in its word count, ignoring all numbers, special characters, and formatting. While it doesn't display upper case letters they can be used to search with. This is because when taking user imput it uses the cctype library to call "to lower" to convert upper case letter to lowercase making the srings case insensitive.
+This program filters strings to only include letters a-z in its word count, ignoring all numbers, special characters, and formatting. While it doesn't display upper case letters they can be used to search with. This is because when taking user imput it uses the cctype library to call "to lower" to convert upper case letter to lowercase making the srings case insensitive. While it does't have most punctuatio, ive decided to allow the apostrophe character.
 The provided test text is shrek.txt, it is the entire shrek 1 movie script :D
