@@ -3,7 +3,13 @@
 #include <fstream>
 #include <cctype> // to lower
 
-
+/**
+* Constructor for the Node class
+* 
+* @param value The value to initialize the node with
+* @pre None
+* @post The node is created with the given value, left and right children are set to null, and the count is set to 1.
+*/
 Node::Node(string value){
   left = NULL;
   right = NULL;
@@ -11,14 +17,33 @@ Node::Node(string value){
   count = 1;
 }
 
+/**
+ * Constructor for the BST class
+ * 
+ * @pre None
+ * @post The BST is created with the root set to NULL.
+ */
 BST::BST() {
   root = NULL;
 }
 
+/**
+ * Destructor for the BST class
+ * 
+ * @pre The BST is properly created
+ * @post All dynamically allocated memory is deallocated using the destructor helper function.
+ */
 BST::~BST() {
   destructorHelper(root);
 }
 
+/**
+ * Recursive helper function to delete nodes in the BST
+ * 
+ * @param current Pointer to the current node being processed
+ * @pre The BST is created
+ * @post The nodes are deleted in post-order (left, right, current)
+ */
 void BST::destructorHelper(Node *current){
   if (current == NULL){
     return;
@@ -28,6 +53,13 @@ void BST::destructorHelper(Node *current){
   delete current;
 }
 
+/**
+ * Inserts a value into the BST
+ * 
+ * @param value The value to insert into the BST
+ * @pre The BST is created
+ * @post The value is inserted in the correct position according to BST rules
+ */
 void BST::insert(string value){
   string newValue = filter(value);
   if (root == NULL){
@@ -38,6 +70,14 @@ void BST::insert(string value){
   }
 }
 
+/**
+ * Recursive helper function to insert a value into the BST
+ * 
+ * @param current The current node being examined
+ * @param value The value to insert
+ * @pre The BST is created
+ * @post The value is inserted in the correct position according to BST rules
+ */
 void BST::insertHelper(Node *current, string value){
   if (value == current->data){
     current->count++;
@@ -60,11 +100,24 @@ void BST::insertHelper(Node *current, string value){
   }
 }
 
+/**
+ * Prints the BST in-order (left, current, right)
+ * 
+ * @pre The BST is created
+ * @post The BST is printed to the console
+ */
 void BST::print(){
   printHelper(root);
   cout << endl;
 }
 
+/**
+ * Recursive helper function to print the BST
+ * 
+ * @param current The current node being printed
+ * @pre The BST is created
+ * @post The BST is printed to the console
+ */
 void BST::printHelper(Node *current){
   if (current == NULL){
     return;
@@ -73,6 +126,15 @@ void BST::printHelper(Node *current){
   cout << current->data << ":" << current->count << " " << endl;
   printHelper(current->right);
 }
+
+
+/**
+ * Writes the BST to a file
+ * 
+ * @param filename The name of the file to write to
+ * @pre The BST is created
+ * @post The BST is written to the specified file
+ */
 void BST::writeFile(string filename){
   ofstream ofile(filename);
   if(!ofile){
@@ -82,6 +144,15 @@ void BST::writeFile(string filename){
   writeHelper(ofile, root);
   cout << "Successfully wrote data to: " << filename << endl;
 }
+
+/**
+ * Recursive helper function to write the BST to a file
+ * 
+ * @param ofile The output file stream
+ * @param current The current node being written
+ * @pre The BST is created
+ * @post The BST is written to the specified file
+ */
 void BST::writeHelper(ofstream& ofile,Node *current){
   if (current == NULL){
       return;
@@ -90,11 +161,28 @@ void BST::writeHelper(ofstream& ofile,Node *current){
   ofile << current->data << ":" << current->count << " " << endl;
   writeHelper(ofile, current->right);
 }
+
+/**
+ * Deletes a node from the BST
+ * 
+ * @param value The value to delete from the BST
+ * @pre The BST is created
+ * @post The node containing the value is removed from the BST
+ */
 void BST::deleteNode(string value){
   string newValue = filter(value);
   deleteHelper(root, newValue);
 }
 
+
+/**
+ * Recursive helper function to delete a node from the BST
+ * 
+ * @param current A reference to the current node being examined
+ * @param value The value to delete
+ * @pre The BST is created
+ * @post The node containing the value is removed from the BST
+ */
 void BST::deleteHelper(Node *&current, string value){
   // node doesn't exist
   if (current == NULL){
@@ -149,6 +237,13 @@ void BST::deleteHelper(Node *&current, string value){
   }
 }
 
+/**
+ * Reads data from a file and inserts it into the BST
+ * 
+ * @param filename The name of the file to read from
+ * @pre The BST is created
+ * @post Data from the file is inserted into the BST
+ */
 void BST::readFile(string filename){
   string word, filteredWord;
 
@@ -168,6 +263,15 @@ void BST::readFile(string filename){
   cout << "Successfully read data from: " << filename << endl;
   infile.close();
 }
+
+/**
+ * Filters a word to only contain alphabetic characters in lowercase
+ * 
+ * @param word The word to filter
+ * @return The filtered word
+ * @pre The word is a string
+ * @post Returns a string with only lowercase alphabetic characters
+ */
 string BST::filter(string word){
   
   char c;
@@ -182,10 +286,23 @@ string BST::filter(string word){
   return newWord;
 }
 
-
+/**
+ * Finds the minimum value in the BST
+ * 
+ * @pre The BST is created
+ * @post The minimum value is printed
+ */
 void BST::min(){
   minHelper(root);
 }
+
+/**
+ * Recursive helper function to find the minimum value in the BST
+ * 
+ * @param current The current node being examined
+ * @pre The BST is created
+ * @post The minimum value is printed
+ */
 void BST::minHelper(Node *current){
   if(current->left == NULL){
     cout << "The smallest value in the BST is \"" << current->data << "\" and it appears "
@@ -195,6 +312,13 @@ void BST::minHelper(Node *current){
   minHelper(current->left);
 }
 
+
+/**
+ * Finds the maximum value in the BST
+ * 
+ * @pre The BST is created
+ * @post The maximum value is printed
+ */
 void BST::max(){
   maxHelper(root);
 }
@@ -208,6 +332,13 @@ void BST::maxHelper(Node *current){
   maxHelper(current->right);
 }
 
+/**
+ * Recursive helper function to find the maximum value in the BST
+ * 
+ * @param current The current node being examined
+ * @pre The BST is created
+ * @post The maximum value is printed
+ */
 void BST::find(string word){
   string newWord = filter(word);
   bool found = false;
@@ -217,6 +348,13 @@ void BST::find(string word){
   }
 }
 
+/**
+ * Finds a specific word in the BST
+ * 
+ * @param word The word to search for
+ * @pre The BST is created
+ * @post If the word is found, it is printed with the number of occurrences
+ */
 void BST::findHelper(Node *current, string word, bool &found){
   if (current == NULL) {
         return;
@@ -232,19 +370,27 @@ void BST::findHelper(Node *current, string word, bool &found){
     findHelper(current->right, word, found);  
 }
 
-/*
+/**
+ * Sets the count for a specific word in the BST
+ * 
+ * @param word The word whose count to set
+ * @param setCount The new count to set for the word
+ * @pre The BST is created
+ * @post The count of the word is set to the specified value
+ */
 void BST::set(string word, int setCount){
-  deleteNode(word);
-  for(int i = 0; i < setCount; i++){
-    insert(word);
-  }
-}*/
-//void BST::setHelper(string word, int setCount, Node *current)
-void BST::set(string word, int setCount){
-  //deleteNode(word);
   setHelper(root,filter(word),setCount);
 }
 
+/**
+ * Recursive helper function to set the count for a specific word in the BST
+ * 
+ * @param current The current node being examined
+ * @param word The word whose count to set
+ * @param setCount The new count to set for the word
+ * @pre The BST is created
+ * @post The count of the word is set to the specified value
+ */
 void BST::setHelper(Node *current, string word, int setCount){
   if (word == current->data){
     current->count = setCount;

@@ -4,14 +4,14 @@ CFLAGS = -c -Wall -Wextra
 
 all: $(TARGET)
 
-$(TARGET): bst.o main.o
-	$(CC) -g -Wall -Wextra -o $(TARGET) main.o bst.o
+$(TARGET): bst.o driver.o
+	$(CC) -g -Wall -Wextra -o $(TARGET) driver.o bst.o
 
 bst.o: bst.cpp bst.h
 	$(CC) $(CFLAGS) bst.cpp
 
-main.o: main.cpp bst.h
-	$(CC) $(CFLAGS) main.cpp
+driver.o: driver.cpp bst.h
+	$(CC) $(CFLAGS) driver.cpp
 
 clean:
 	$(RM) $(TARGET) *.o *~

@@ -1,3 +1,12 @@
+/**
+ * @file driver.cpp
+ * @author Dylan Daniels
+ * @date 2024-12-05
+ * @brief driver function
+ * 
+ * Is the file for showing my implemetation of the BST ADT
+ */
+
 #include <iostream>
 #include "bst.h"
 using namespace std;
@@ -85,14 +94,5 @@ int main() {
     }
     }
   } while (choice != 10);
-  /*  
-  tree.read_file("song.txt");
-  tree.print();
-  tree.min();
-  tree.max();
-  tree.find("t");
-  tree.find("test");
-  tree.set("test", 5);
-  tree.print();*/
   return 0;
 }

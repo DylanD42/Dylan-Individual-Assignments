@@ -1,1 +1,24 @@
-readme file
+/**
+ * @file README
+ * @author Dylan Daniels
+ * @date 2024-12-05
+ * @brief BST ADT implementation
+ * 
+ * Uses the BST ADT for a word count from imput files
+ */
+
+To run the program use ./run
+You will be prompted with 10 options 
+    1. Load the BST from a text file
+    2. Save the BST to a text file.
+    3. Insert a element into the BST.
+    4. Print the BST.
+    5. Search for how many times a word is in the BST.
+    6. Show the largest value in the BST
+    7. Show the smallest value in the BST.
+    8. Update the data of a element.
+    9. Delete a element.
+    10. Exit this program.
+
+This program filters strings to only include letters a-z in its word count, ignoring all numbers, special characters, and formatting. While it doesn't display upper case letters they can be used to search with. This is because when taking user imput it uses the cctype library to call "to lower" to convert upper case letter to lowercase making the srings case insensitive.
+The provided test text is shrek.txt, it is the entire shrek 1 movie script :D
