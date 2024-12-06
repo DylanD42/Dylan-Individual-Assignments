@@ -23,6 +23,8 @@ private:
   void deleteHelper(Node* &current, string value);
   void minHelper(Node *current);
   void maxHelper(Node *current);
+  void writeHelper(ofstream& ofile, Node *current);
+  void setHelper(Node *current, string word, int count);
   void findHelper(Node *current, string word, bool &found);
   string filter(string word);
 public:
@@ -35,8 +37,8 @@ public:
   void set(string word, int setCount);
   void print();
   void find(string word);
-  void save_file(string filename);
-  void read_file(string filename);
+  void writeFile(string filename);
+  void readFile(string filename);
   void deleteNode(string value);
   
 };

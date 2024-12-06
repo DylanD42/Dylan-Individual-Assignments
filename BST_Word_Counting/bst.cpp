@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <cctype> // to lower
-using namespace std;
+
 
 Node::Node(string value){
   left = NULL;
@@ -29,11 +29,12 @@ void BST::destructorHelper(Node *current){
 }
 
 void BST::insert(string value){
+  string newValue = filter(value);
   if (root == NULL){
-    root = new Node(value);
+    root = new Node(newValue);
   }
   else{
-    insertHelper(root, value);
+    insertHelper(root, newValue);
   }
 }
 
@@ -72,9 +73,26 @@ void BST::printHelper(Node *current){
   cout << current->data << ":" << current->count << " " << endl;
   printHelper(current->right);
 }
-
+void BST::writeFile(string filename){
+  ofstream ofile(filename);
+  if(!ofile){
+   cout << "File could not be opened." << endl;
+   return;
+  }
+  writeHelper(ofile, root);
+  cout << "Successfully wrote data to: " << filename << endl;
+}
+void BST::writeHelper(ofstream& ofile,Node *current){
+  if (current == NULL){
+      return;
+  }
+  writeHelper(ofile, current->left);
+  ofile << current->data << ":" << current->count << " " << endl;
+  writeHelper(ofile, current->right);
+}
 void BST::deleteNode(string value){
-  deleteHelper(root, value);
+  string newValue = filter(value);
+  deleteHelper(root, newValue);
 }
 
 void BST::deleteHelper(Node *&current, string value){
@@ -131,7 +149,7 @@ void BST::deleteHelper(Node *&current, string value){
   }
 }
 
-void BST::read_file(string filename){
+void BST::readFile(string filename){
   string word, filteredWord;
 
   ifstream infile(filename);
@@ -147,6 +165,7 @@ void BST::read_file(string filename){
     }
     infile >> word;  
   }
+  cout << "Successfully read data from: " << filename << endl;
   infile.close();
 }
 string BST::filter(string word){
@@ -169,7 +188,8 @@ void BST::min(){
 }
 void BST::minHelper(Node *current){
   if(current->left == NULL){
-    cout << "MIN: " << current->data << endl;
+    cout << "The smallest value in the BST is \"" << current->data << "\" and it appears "
+	 << current->count << " times." << endl;
     return;
   }
   minHelper(current->left);
@@ -181,18 +201,20 @@ void BST::max(){
 
 void BST::maxHelper(Node *current){
   if(current->right == NULL){
-    cout << "MAX: " << current->data << endl;
+     cout << "The largest value in the BST is \"" << current->data << "\" and it appears "
+         << current->count << " times." << endl;
     return;
   }
   maxHelper(current->right);
 }
 
 void BST::find(string word){
-    bool found = false;
-    findHelper(root, word, found);
-    if (!found) {
-      cout << word << " wasn't found in the BST." << endl;
-    }
+  string newWord = filter(word);
+  bool found = false;
+  findHelper(root, newWord, found);
+  if (!found) {
+    cout << newWord << " wasn't found in the BST." << endl;
+  }
 }
 
 void BST::findHelper(Node *current, string word, bool &found){
@@ -210,12 +232,45 @@ void BST::findHelper(Node *current, string word, bool &found){
     findHelper(current->right, word, found);  
 }
 
-
+/*
 void BST::set(string word, int setCount){
   deleteNode(word);
   for(int i = 0; i < setCount; i++){
     insert(word);
   }
+}*/
+//void BST::setHelper(string word, int setCount, Node *current)
+void BST::set(string word, int setCount){
+  //deleteNode(word);
+  setHelper(root,filter(word),setCount);
 }
-  
-  
+
+void BST::setHelper(Node *current, string word, int setCount){
+  if (word == current->data){
+    current->count = setCount;
+  }
+  else if (current == NULL){
+    insert(word);
+    setHelper(root, word,setCount);
+  }
+  else if (word < current->data){
+    if (current->left == NULL) {
+      current->left = new Node(word);
+      current->left->count = setCount;
+    }
+    else{
+      setHelper(current->left, word, setCount);
+    }
+  }
+  else {
+    if ((*current).right == NULL){
+      (*current).right = new Node(word);
+      current->right->count = setCount;
+    }
+    else{
+      setHelper((*current).right, word, setCount);
+    }
+  }
+}
+
+
